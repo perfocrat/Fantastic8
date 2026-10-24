@@ -1,0 +1,224 @@
+CIRCULAR INFINITE-WELL BACKEND TEST REPORT
+================================================
+Backend: circle_backend.py
+Assumptions: 2D circular infinite well; R=1.0, mass=1.0, hbar=1.0
+Grid: 160 x 160; requested states: 120
+Inputs tested: m=1..5, n=1..5 (25 unique quantum-number combinations)
+Energy theory: E_mn = hbar^2 * alpha_mn^2 / (2 M R^2), J_m(alpha_mn)=0
+Normalization is checked numerically over the Cartesian grid; a finite-grid tolerance is used.
+
+[CASE] m=1, n=1
+  [PASS] Energy: backend=7.3409853, theory=7.3409853
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=1, n=2
+  [PASS] Energy: backend=24.609228, theory=24.609228
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=1, n=3
+  [PASS] Energy: backend=51.749727, theory=51.749727
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=1, n=4
+  [PASS] Energy: backend=88.760383, theory=88.760383
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=1, n=5
+  [PASS] Energy: backend=135.64083, theory=135.64083
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=2, n=1
+  [PASS] Energy: backend=13.187308, theory=13.187308
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=2, n=2
+  [PASS] Energy: backend=35.424999, theory=35.424999
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=2, n=3
+  [PASS] Energy: backend=67.510354, theory=67.510354
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=2, n=4
+  [PASS] Energy: backend=109.46009, theory=109.46009
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=2, n=5
+  [PASS] Energy: backend=161.27756, theory=161.27756
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000002
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=3, n=1
+  [PASS] Energy: backend=20.353233, theory=20.353233
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=3, n=2
+  [PASS] Energy: backend=47.638786, theory=47.638786
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=3, n=3
+  [PASS] Energy: backend=84.697725, theory=84.697725
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=3, n=4
+  [PASS] Energy: backend=131.60043, theory=131.60043
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=3, n=5
+  [PASS] Energy: backend=188.3627, theory=188.3627
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=4, n=1
+  [PASS] Energy: backend=28.79147, theory=28.79147
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=4, n=2
+  [PASS] Energy: backend=61.213898, theory=61.213898
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=4, n=3
+  [PASS] Energy: backend=103.28491, theory=103.28491
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=4, n=4
+  [PASS] Energy: backend=155.16113, theory=155.16113
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=4, n=5
+  [PASS] Energy: backend=216.88057, theory=216.88057
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000002
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=5, n=1
+  [PASS] Energy: backend=38.469464, theory=38.469464
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=5, n=2
+  [PASS] Energy: backend=76.120577, theory=76.120577
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=5, n=3
+  [PASS] Energy: backend=123.24773, theory=123.24773
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000000
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=5, n=4
+  [PASS] Energy: backend=180.12274, theory=180.12274
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[CASE] m=5, n=5
+  [PASS] Energy: backend=246.81532, theory=246.81532
+  [PASS] Wavefunction/density arrays match the 2D grid and are finite inside
+  [PASS] Probability density equals |wavefunction|^2
+  [PASS] Numerical normalization integral=1.000001
+  [PASS] Wavefunction and density are masked outside the well
+  [INFO] Angular type checked: C
+
+[PLOT TEST]
+  [PASS] All expected plot files were generated: energy_levels, probability_density, shape, wavefunctions
+
+================================================
+Unique (m,n) cases passed: 25/25
+Unique (m,n) cases failed: 0/25
+Individual checks passed: 135
+Individual checks failed: 0
+
+Notes:
+- This harness uses the backend's actual run_circle() API and Cartesian grids.
+- The backend returns cosine/sine angular variants for m > 0; each (m,n) pair is tested once.
+- Normalization is approximated by a Cartesian-grid integral, so a finite-grid tolerance is used.
+- This script checks the infinite-well mask; the backend does not return a numeric potential array.
+- Review any failed checks before merging the backend into main.
