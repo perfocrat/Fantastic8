@@ -4,15 +4,9 @@ Quantum Well Explorer
 ---------------------
 Streamlit UI for exploring two-dimensional infinite quantum wells.
 
-This module is UI-only:
-- Geometry and quantum-state input controls
-- Geometry previews
-- Illustrative wavefunction and probability-density plots
-- Energy-level display placeholders
-
-The plots are NOT physics solutions. They will be replaced by
-the outputs of the corresponding shape-specific solvers when
-the physics modules are integrated.
+This module collects geometry and quantum-state inputs, dispatches the
+selected shape solver, and renders its wavefunction, probability density,
+and energy results.
 """
 
 import streamlit as st
@@ -27,8 +21,7 @@ from matplotlib.patches import (
     Ellipse,
 )
 
-# The rectangle solver is the first backend connected to the UI.
-from shapes.adapters import calculate_rectangle
+from shapes.adapters import calculate_shape
 
 # ============================================================
 # PAGE CONFIGURATION
@@ -236,21 +229,11 @@ elif shape == "Annulus":
     geometry["inner_radius"] = st.sidebar.slider(
         "Inner radius, Ri (nm)",
         min_value=0.5,
-        max_value=9.0,
-        value=2.0,
+        max_value=min(9.0, geometry["outer_radius"] - 0.5),
+        value=min(2.0, geometry["outer_radius"] - 0.5),
         step=0.5,
         help="Radius of the inner circular boundary. It must be smaller than Ro.",
     )
-
-    # Ensure that the inner radius remains smaller than the outer radius.
-    if geometry["inner_radius"] >= geometry["outer_radius"]:
-        st.sidebar.warning(
-            "The inner radius must be smaller than the outer radius."
-        )
-        geometry["inner_radius"] = max(
-            0.5,
-            geometry["outer_radius"] - 0.5,
-        )
 
 elif shape == "Ellipse":
 
@@ -265,11 +248,11 @@ elif shape == "Ellipse":
 
     geometry["semi_minor"] = st.sidebar.slider(
         "Semi-minor axis, B (nm)",
-        min_value=1.0,
-        max_value=10.0,
-        value=3.0,
-        step=0.5,
-        help="Half of the ellipse's shorter diameter.",
+        min_value=0.1,
+        max_value=geometry["semi_major"] - 0.1,
+        value=min(3.0, geometry["semi_major"] - 0.1),
+        step=0.1,
+        help="Half of the ellipse's shorter diameter; must be smaller than A.",
     )
 
 # ============================================================
@@ -279,29 +262,81 @@ elif shape == "Ellipse":
 st.sidebar.divider()
 st.sidebar.subheader("Quantum State")
 
+if shape == "Equilateral Triangle":
+    m_label = "Quantum number, m"
+    n_label = "Quantum number, n"
+    m_minimum = n_minimum = 1
+    m_maximum = 5
+    n_maximum = None
+    state_help = "The triangle solver requires 1 <= n <= m <= 5."
+elif shape == "Circle":
+    m_label = "Angular mode, m"
+    n_label = "Radial index, n"
+    m_minimum = 0
+    n_minimum = 1
+    m_maximum = n_maximum = 10
+    state_help = "The circular solver uses m >= 0 and n >= 1."
+elif shape == "Annulus":
+    m_label = "Angular momentum, l"
+    n_label = "Radial index, q"
+    m_minimum = 0
+    n_minimum = 1
+    m_maximum = n_maximum = 10
+    state_help = "The annulus solver uses l >= 0 and q >= 1."
+elif shape == "Circular Sector":
+    m_label = "Angular index, ell"
+    n_label = "Radial index, s"
+    m_minimum = n_minimum = 1
+    m_maximum = n_maximum = 10
+    state_help = "The sector solver uses ell >= 1 and s >= 1."
+elif shape == "Ellipse":
+    m_label = "Angular mode, m"
+    n_label = "Radial index, j"
+    m_minimum = 0
+    n_minimum = 1
+    m_maximum = n_maximum = 10
+    state_help = "The ellipse solver uses m >= 0 and j >= 1 (cosine family)."
+else:
+    m_label = "Quantum number, m"
+    n_label = "Quantum number, n"
+    m_minimum = n_minimum = 1
+    m_maximum = n_maximum = 10
+    state_help = "Rectangle states use positive integer indices."
+
 m = st.sidebar.slider(
-    "Quantum number, m",
-    min_value=1,
-    max_value=10,
+    m_label,
+    min_value=m_minimum,
+    max_value=m_maximum,
     value=1,
     step=1,
-    help=(
-        "First quantum-number index. Its physical interpretation "
-        "depends on the selected geometry and solver convention."
-    ),
+    help=state_help,
+    key="triangle_m" if shape == "Equilateral Triangle" else None,
 )
 
-n = st.sidebar.slider(
-    "Quantum number, n",
-    min_value=1,
-    max_value=10,
-    value=1,
-    step=1,
-    help=(
-        "Second quantum-number index. Its physical interpretation "
-        "depends on the selected geometry and solver convention."
-    ),
-)
+if shape == "Equilateral Triangle":
+    st.session_state.setdefault("triangle_n", n_minimum)
+    st.session_state["triangle_n"] = min(
+        max(n_minimum, st.session_state["triangle_n"]),
+        m,
+    )
+    n = st.sidebar.slider(
+        n_label,
+        min_value=n_minimum,
+        max_value=max(m, n_minimum + 1),
+        step=1,
+        help=f"{state_help} When m=1, n is fixed at 1.",
+        key="triangle_n",
+        disabled=m == n_minimum,
+    )
+else:
+    n = st.sidebar.slider(
+        n_label,
+        min_value=n_minimum,
+        max_value=n_maximum,
+        value=1,
+        step=1,
+        help=state_help,
+    )
 
 st.sidebar.divider()
 st.sidebar.subheader("Visualisation Settings")
@@ -312,10 +347,7 @@ resolution = st.sidebar.slider(
     max_value=150,
     value=70,
     step=10,
-    help=(
-        "Number of points used along each axis of the illustrative "
-        "visualisation grid. This affects plot smoothness, not physics."
-    ),
+    help="Number of points used along each axis of the solver display grid.",
 )
 
 display_mode = st.sidebar.radio(
@@ -551,37 +583,6 @@ def draw_geometry(ax, shape, geometry):
 
 
 # ============================================================
-# ILLUSTRATIVE VISUALISATION
-# ============================================================
-
-def generate_mock_field(X, Y, mask, m, n):
-    """
-    Generates a generic illustrative field.
-
-    IMPORTANT:
-    This is NOT a quantum-mechanical solution.
-    It is only a visual placeholder until the actual solver
-    is connected.
-    """
-
-    x_min, x_max = np.min(X), np.max(X)
-    y_min, y_max = np.min(Y), np.max(Y)
-
-    # Convert coordinates into a common plotting range.
-    u = (X - x_min) / max(x_max - x_min, 1e-12)
-    v = (Y - y_min) / max(y_max - y_min, 1e-12)
-
-    field = (
-        np.sin(m * np.pi * u)
-        * np.sin(n * np.pi * v)
-    )
-
-    field = np.where(mask, field, np.nan)
-
-    return field
-
-
-# ============================================================
 # MAIN HEADER
 # ============================================================
 
@@ -598,11 +599,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.info(
-    "Prototype mode: geometry previews and field plots are illustrative. "
-    "Actual wavefunctions and energy eigenvalues will be supplied by "
-    "the corresponding physics solvers."
-)
+st.info("Each selection is calculated by its corresponding shape solver.")
 
 # ============================================================
 # SELECTED PARAMETERS
@@ -613,7 +610,9 @@ st.subheader("Selected Configuration")
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Well geometry", shape)
-col2.metric("Quantum state", f"({m}, {n})")
+first_index = m_label.rsplit(",", maxsplit=1)[-1].strip()
+second_index = n_label.rsplit(",", maxsplit=1)[-1].strip()
+col2.metric("Quantum state", f"{first_index}={m}, {second_index}={n}")
 col3.metric("Grid resolution", f"{resolution} × {resolution}")
 
 st.caption(SHAPE_DESCRIPTIONS[shape])
@@ -672,55 +671,53 @@ with st.expander("View geometric parameters", expanded=True):
             st.metric(label, value)
 
 # ============================================================
-# CALCULATE SELECTED STATE / BUILD VISUALISATION GRID
+# CALCULATE THE SELECTED STATE
 # ============================================================
 
+x_min, x_max, y_min, y_max, _ = get_domain(shape, geometry)
+adapter_inputs = {"m": m, "n": n, "grid": resolution}
+if shape == "Equilateral Triangle":
+    adapter_inputs.update(side=geometry["side"] * 1e-9)
+elif shape == "Rectangle":
+    adapter_inputs.update(
+        width=geometry["width"] * 1e-9,
+        height=geometry["height"] * 1e-9,
+    )
+elif shape == "Circle":
+    adapter_inputs.update(radius=geometry["radius"] * 1e-9)
+elif shape == "Circular Sector":
+    adapter_inputs.update(
+        radius=geometry["radius"] * 1e-9,
+        angle=geometry["angle"],
+        start_angle=geometry["start_angle"],
+    )
+elif shape == "Annulus":
+    adapter_inputs.update(
+        r_inner=geometry["inner_radius"] * 1e-9,
+        r_outer=geometry["outer_radius"] * 1e-9,
+        angular_momentum=m,
+        radial_index=n,
+    )
+    adapter_inputs.pop("m")
+    adapter_inputs.pop("n")
+elif shape == "Ellipse":
+    adapter_inputs.update(
+        semi_major=geometry["semi_major"] * 1e-9,
+        semi_minor=geometry["semi_minor"] * 1e-9,
+    )
+
 solver_result = None
-real_solver_active = False
-x_min, x_max, y_min, y_max, domain_mask = get_domain(shape, geometry)
 solver_error = None
-
-# Rectangle dimensions are entered in nanometres by the UI, while
-# the rectangle solver uses SI units (metres).
-if shape == "Rectangle" and calculate_rectangle is not None:
-    try:
-        solver_result = calculate_rectangle(
-            width=geometry["width"] * 1e-9,
-            height=geometry["height"] * 1e-9,
-            m=m,
-            n=n,
-            grid=resolution,
-        )
-        X = np.asarray(solver_result["X"]) * 1e9
-        Y = np.asarray(solver_result["Y"]) * 1e9
-        field = np.asarray(solver_result["wavefunction"])
-        probability_density = np.asarray(solver_result["probability_density"])
-        real_solver_active = True
-    except Exception as exc:
-        solver_error = str(exc)
-
-if not real_solver_active:
-    x = np.linspace(x_min, x_max, resolution)
-    y = np.linspace(y_min, y_max, resolution)
-    X, Y = np.meshgrid(x, y)
-    mask = domain_mask(X, Y)
-    field = generate_mock_field(X, Y, mask, m, n)
-    probability_density = np.abs(field) ** 2
-
-if shape == "Rectangle" and calculate_rectangle is None:
-    solver_error = (
-        "Could not import calculate_rectangle from shapes.adapters. "
-        "Check that shapes/adapters.py exists and that the app is run "
-        "from the repository root."
-    )
-
-if solver_error:
-    st.error(f"Rectangle solver could not calculate this state: {solver_error}")
-elif not real_solver_active:
-    st.info(
-        "This shape's physics solver is not connected yet. "
-        "Its plots are illustrative placeholders, not calculated eigenfunctions."
-    )
+try:
+    solver_result = calculate_shape(shape, **adapter_inputs)
+    X = np.asarray(solver_result["X"], dtype=float) * 1e9
+    Y = np.asarray(solver_result["Y"], dtype=float) * 1e9
+    field = np.asarray(solver_result["wavefunction"], dtype=float)
+    probability_density = np.asarray(solver_result["probability_density"], dtype=float)
+except Exception as exc:
+    solver_result = None
+    solver_error = f"{type(exc).__name__}: {exc}"
+    st.error(f"{shape} solver could not calculate this state: {solver_error}")
 
 # ============================================================
 # VISUALISATION SECTION
@@ -755,21 +752,22 @@ with geometry_column:
 with wavefunction_column:
 
     st.markdown("**Selected quantum state**")
-    st.markdown(f"Quantum numbers: `m = {m}`, `n = {n}`")
+    st.markdown(
+        f"Selected solver state: `{solver_result['inputs']}`"
+        if solver_result is not None
+        else f"Requested state: `{m}, {n}`"
+    )
 
-    if real_solver_active:
-        st.markdown("The plots below use the connected rectangle solver.")
+    if solver_result is not None:
+        st.markdown(f"Calculated using the {solver_result['shape']} solver.")
     else:
-        st.markdown(
-            "The field plots below are illustrative previews, "
-            "not calculated eigenfunctions."
-        )
+        st.markdown("No field is shown because the solver did not return a result.")
 
 # ============================================================
 # WAVEFUNCTION AND PROBABILITY PLOTS
 # ============================================================
 
-if display_mode in ["Both plots", "Wavefunction only"]:
+if solver_result is not None and display_mode in ["Both plots", "Wavefunction only"]:
 
     st.markdown("### Wavefunction preview")
 
@@ -791,14 +789,10 @@ if display_mode in ["Both plots", "Wavefunction only"]:
     fig_wave.colorbar(
         contour,
         ax=ax_wave,
-        label="Wavefunction amplitude" if real_solver_active else "Illustrative amplitude",
+        label="Wavefunction amplitude",
     )
 
-    ax_wave.set_title(
-        (f"Wavefunction ψ — state ({m}, {n})" if real_solver_active
-         else f"Illustrative wavefunction ψ — state ({m}, {n})"),
-        color="white",
-    )
+    ax_wave.set_title(f"Wavefunction ψ — {shape}", color="white")
 
     ax_wave.set_xlabel("x (nm)", color="white")
     ax_wave.set_ylabel("y (nm)", color="white")
@@ -808,7 +802,7 @@ if display_mode in ["Both plots", "Wavefunction only"]:
     st.pyplot(fig_wave)
     plt.close(fig_wave)
 
-if display_mode in ["Both plots", "Probability density only"]:
+if solver_result is not None and display_mode in ["Both plots", "Probability density only"]:
 
     st.markdown("### Probability density preview")
 
@@ -830,14 +824,10 @@ if display_mode in ["Both plots", "Probability density only"]:
     fig_probability.colorbar(
         contour,
         ax=ax_probability,
-        label="Probability density |ψ|²" if real_solver_active else "Illustrative |ψ|²",
+        label="Probability density |ψ|²",
     )
 
-    ax_probability.set_title(
-        (f"Probability density — state ({m}, {n})" if real_solver_active
-         else f"Illustrative probability density — state ({m}, {n})"),
-        color="white",
-    )
+    ax_probability.set_title(f"Probability density — {shape}", color="white")
 
     ax_probability.set_xlabel("x (nm)", color="white")
     ax_probability.set_ylabel("y (nm)", color="white")
@@ -856,7 +846,7 @@ st.subheader("Energy Information")
 
 energy_col1, energy_col2, energy_col3 = st.columns(3)
 
-if real_solver_active:
+if solver_result is not None:
     states = solver_result["states"]
     ground_state = min(states, key=lambda state: state["E"])
     selected_energy = float(solver_result["energy"])
@@ -866,14 +856,34 @@ if real_solver_active:
     energy_col1.metric("Ground-state energy", f"{ground_energy:.4e} J")
     energy_col2.metric("Selected-state energy", f"{selected_energy:.4e} J")
     energy_col3.metric("Energy difference", f"{energy_difference:.4e} J")
-    st.success("Energy and field values are from the connected rectangle solver.")
+    st.success(f"Energy and fields are from the {solver_result['shape']} solver.")
+    fig_energy, ax_energy = plt.subplots(figsize=(7, 3.5))
+    fig_energy.patch.set_facecolor("#0b1020")
+    for index, state in enumerate(states, start=1):
+        ax_energy.hlines(state["E"], index - 0.35, index + 0.35, color="#53b9ff", linewidth=2)
+        ax_energy.text(
+            index,
+            state["E"],
+            f"({state['m']},{state['n']})",
+            color="#e8edf7",
+            ha="center",
+            va="bottom",
+            fontsize=8,
+        )
+    ax_energy.set_xlim(0.5, len(states) + 0.5)
+    ax_energy.set_xlabel("Returned state")
+    ax_energy.set_ylabel("Energy (J)")
+    ax_energy.set_title(f"Energy levels — {shape}", color="white")
+    ax_energy.tick_params(colors="white")
+    ax_energy.grid(axis="y", alpha=0.25)
+    st.pyplot(fig_energy)
+    plt.close(fig_energy)
 else:
     energy_col1.metric("Ground-state energy", "Not calculated")
     energy_col2.metric("Selected-state energy", "Not calculated")
     energy_col3.metric("Energy difference", "Not calculated")
     st.warning(
-        "No physics solver is connected for this selected shape/state. "
-        "Any displayed field plots are illustrative placeholders."
+        "Energy and fields are unavailable because the selected solver failed."
     )
 
 # ============================================================
@@ -893,9 +903,7 @@ with st.expander("Understanding the quantum numbers"):
         Their mathematical interpretation depends on the geometry.
         Different geometries can use different quantum-number conventions.
 
-        Rectangle states use the connected rectangle solver when available.
-        Other shapes still use a generic sine-pattern placeholder until their
-        shape-specific solvers are connected.
+        Each shape uses its own solver and quantum-number convention.
         """
     )
 
@@ -906,7 +914,5 @@ with st.expander("Understanding the quantum numbers"):
 st.divider()
 
 st.caption(
-    "Quantum Well Explorer | Rectangle solver integration in progress | "
-    "Other shape solvers pending"
+    "Quantum Well Explorer | Six shape-specific solvers"
 )
-
