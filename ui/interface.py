@@ -27,6 +27,9 @@ from matplotlib.patches import (
     Ellipse,
 )
 
+# The rectangle solver is the first backend connected to the UI.
+from shapes.adapters import calculate_rectangle
+
 # ============================================================
 # PAGE CONFIGURATION
 # ============================================================
@@ -669,30 +672,55 @@ with st.expander("View geometric parameters", expanded=True):
             st.metric(label, value)
 
 # ============================================================
-# BUILD GRID
+# CALCULATE SELECTED STATE / BUILD VISUALISATION GRID
 # ============================================================
 
-x_min, x_max, y_min, y_max, domain_mask = get_domain(
-    shape,
-    geometry,
-)
+solver_result = None
+real_solver_active = False
+x_min, x_max, y_min, y_max, domain_mask = get_domain(shape, geometry)
+solver_error = None
 
-x = np.linspace(x_min, x_max, resolution)
-y = np.linspace(y_min, y_max, resolution)
+# Rectangle dimensions are entered in nanometres by the UI, while
+# the rectangle solver uses SI units (metres).
+if shape == "Rectangle" and calculate_rectangle is not None:
+    try:
+        solver_result = calculate_rectangle(
+            width=geometry["width"] * 1e-9,
+            height=geometry["height"] * 1e-9,
+            m=m,
+            n=n,
+            grid=resolution,
+        )
+        X = np.asarray(solver_result["X"]) * 1e9
+        Y = np.asarray(solver_result["Y"]) * 1e9
+        field = np.asarray(solver_result["wavefunction"])
+        probability_density = np.asarray(solver_result["probability_density"])
+        real_solver_active = True
+    except Exception as exc:
+        solver_error = str(exc)
 
-X, Y = np.meshgrid(x, y)
+if not real_solver_active:
+    x = np.linspace(x_min, x_max, resolution)
+    y = np.linspace(y_min, y_max, resolution)
+    X, Y = np.meshgrid(x, y)
+    mask = domain_mask(X, Y)
+    field = generate_mock_field(X, Y, mask, m, n)
+    probability_density = np.abs(field) ** 2
 
-mask = domain_mask(X, Y)
+if shape == "Rectangle" and calculate_rectangle is None:
+    solver_error = (
+        "Could not import calculate_rectangle from shapes.adapters. "
+        "Check that shapes/adapters.py exists and that the app is run "
+        "from the repository root."
+    )
 
-field = generate_mock_field(
-    X,
-    Y,
-    mask,
-    m,
-    n,
-)
-
-probability_density = field**2
+if solver_error:
+    st.error(f"Rectangle solver could not calculate this state: {solver_error}")
+elif not real_solver_active:
+    st.info(
+        "This shape's physics solver is not connected yet. "
+        "Its plots are illustrative placeholders, not calculated eigenfunctions."
+    )
 
 # ============================================================
 # VISUALISATION SECTION
@@ -729,10 +757,13 @@ with wavefunction_column:
     st.markdown("**Selected quantum state**")
     st.markdown(f"Quantum numbers: `m = {m}`, `n = {n}`")
 
-    st.markdown(
-        "The field plots below are illustrative previews, "
-        "not calculated eigenfunctions."
-    )
+    if real_solver_active:
+        st.markdown("The plots below use the connected rectangle solver.")
+    else:
+        st.markdown(
+            "The field plots below are illustrative previews, "
+            "not calculated eigenfunctions."
+        )
 
 # ============================================================
 # WAVEFUNCTION AND PROBABILITY PLOTS
@@ -760,11 +791,12 @@ if display_mode in ["Both plots", "Wavefunction only"]:
     fig_wave.colorbar(
         contour,
         ax=ax_wave,
-        label="Illustrative amplitude",
+        label="Wavefunction amplitude" if real_solver_active else "Illustrative amplitude",
     )
 
     ax_wave.set_title(
-        f"Illustrative wavefunction ψ — state ({m}, {n})",
+        (f"Wavefunction ψ — state ({m}, {n})" if real_solver_active
+         else f"Illustrative wavefunction ψ — state ({m}, {n})"),
         color="white",
     )
 
@@ -798,11 +830,12 @@ if display_mode in ["Both plots", "Probability density only"]:
     fig_probability.colorbar(
         contour,
         ax=ax_probability,
-        label="Illustrative |ψ|²",
+        label="Probability density |ψ|²" if real_solver_active else "Illustrative |ψ|²",
     )
 
     ax_probability.set_title(
-        f"Illustrative probability density — state ({m}, {n})",
+        (f"Probability density — state ({m}, {n})" if real_solver_active
+         else f"Illustrative probability density — state ({m}, {n})"),
         color="white",
     )
 
@@ -823,25 +856,25 @@ st.subheader("Energy Information")
 
 energy_col1, energy_col2, energy_col3 = st.columns(3)
 
-energy_col1.metric(
-    "Ground-state energy",
-    "Not calculated",
-)
+if real_solver_active:
+    states = solver_result["states"]
+    ground_state = min(states, key=lambda state: state["E"])
+    selected_energy = float(solver_result["energy"])
+    ground_energy = float(ground_state["E"])
+    energy_difference = selected_energy - ground_energy
 
-energy_col2.metric(
-    "Selected-state energy",
-    "Not calculated",
-)
-
-energy_col3.metric(
-    "Energy difference",
-    "Not calculated",
-)
-
-st.warning(
-    "Physics solver not connected. Energy values will be displayed "
-    "here once the corresponding shape-specific calculations are integrated."
-)
+    energy_col1.metric("Ground-state energy", f"{ground_energy:.4e} J")
+    energy_col2.metric("Selected-state energy", f"{selected_energy:.4e} J")
+    energy_col3.metric("Energy difference", f"{energy_difference:.4e} J")
+    st.success("Energy and field values are from the connected rectangle solver.")
+else:
+    energy_col1.metric("Ground-state energy", "Not calculated")
+    energy_col2.metric("Selected-state energy", "Not calculated")
+    energy_col3.metric("Energy difference", "Not calculated")
+    st.warning(
+        "No physics solver is connected for this selected shape/state. "
+        "Any displayed field plots are illustrative placeholders."
+    )
 
 # ============================================================
 # QUANTUM NUMBER INFORMATION
@@ -860,8 +893,9 @@ with st.expander("Understanding the quantum numbers"):
         Their mathematical interpretation depends on the geometry.
         Different geometries can use different quantum-number conventions.
 
-        The current plots use a generic sine-pattern placeholder.
-        They do not represent the actual eigenfunctions of all six wells.
+        Rectangle states use the connected rectangle solver when available.
+        Other shapes still use a generic sine-pattern placeholder until their
+        shape-specific solvers are connected.
         """
     )
 
@@ -872,7 +906,7 @@ with st.expander("Understanding the quantum numbers"):
 st.divider()
 
 st.caption(
-    "Quantum Well Explorer | UI Prototype | "
-    "Physics solver integration pending"
+    "Quantum Well Explorer | Rectangle solver integration in progress | "
+    "Other shape solvers pending"
 )
 
