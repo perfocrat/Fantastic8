@@ -1,0 +1,520 @@
+
+============================================================================
+RECTANGULAR INFINITE POTENTIAL WELL — COMPREHENSIVE TESTS
+Rectangle: a=5.000e-09 m, b=4.000e-09 m
+Grid: 401 x 401
+============================================================================
+
+1–4. Energy, wavefunction, probability density and normalization
+[PASS] Energy (m=1, n=1) — backend=6.17528408e-21 J, theory=6.17528408e-21 J
+[PASS] Wavefunction (m=1, n=1)
+[PASS] Probability density (m=1, n=1)
+[PASS] Normalization (m=1, n=1) — integral=1.00000000
+[PASS] Energy (m=1, n=2) — backend=1.74715354e-20 J, theory=1.74715354e-20 J
+[PASS] Wavefunction (m=1, n=2)
+[PASS] Probability density (m=1, n=2)
+[PASS] Normalization (m=1, n=2) — integral=1.00000000
+[PASS] Energy (m=1, n=3) — backend=3.62986211e-20 J, theory=3.62986211e-20 J
+[PASS] Wavefunction (m=1, n=3)
+[PASS] Probability density (m=1, n=3)
+[PASS] Normalization (m=1, n=3) — integral=1.00000000
+[PASS] Energy (m=1, n=4) — backend=6.26565409e-20 J, theory=6.26565409e-20 J
+[PASS] Wavefunction (m=1, n=4)
+[PASS] Probability density (m=1, n=4)
+[PASS] Normalization (m=1, n=4) — integral=1.00000000
+[PASS] Energy (m=1, n=5) — backend=9.65452950e-20 J, theory=9.65452950e-20 J
+[PASS] Wavefunction (m=1, n=5)
+[PASS] Probability density (m=1, n=5)
+[PASS] Normalization (m=1, n=5) — integral=1.00000000
+[PASS] Energy (m=2, n=1) — backend=1.34048850e-20 J, theory=1.34048850e-20 J
+[PASS] Wavefunction (m=2, n=1)
+[PASS] Probability density (m=2, n=1)
+[PASS] Normalization (m=2, n=1) — integral=1.00000000
+[PASS] Energy (m=2, n=2) — backend=2.47011363e-20 J, theory=2.47011363e-20 J
+[PASS] Wavefunction (m=2, n=2)
+[PASS] Probability density (m=2, n=2)
+[PASS] Normalization (m=2, n=2) — integral=1.00000000
+[PASS] Energy (m=2, n=3) — backend=4.35282219e-20 J, theory=4.35282219e-20 J
+[PASS] Wavefunction (m=2, n=3)
+[PASS] Probability density (m=2, n=3)
+[PASS] Normalization (m=2, n=3) — integral=1.00000000
+[PASS] Energy (m=2, n=4) — backend=6.98861418e-20 J, theory=6.98861418e-20 J
+[PASS] Wavefunction (m=2, n=4)
+[PASS] Probability density (m=2, n=4)
+[PASS] Normalization (m=2, n=4) — integral=1.00000000
+[PASS] Energy (m=2, n=5) — backend=1.03774896e-19 J, theory=1.03774896e-19 J
+[PASS] Wavefunction (m=2, n=5)
+[PASS] Probability density (m=2, n=5)
+[PASS] Normalization (m=2, n=5) — integral=1.00000000
+[PASS] Energy (m=3, n=1) — backend=2.54542197e-20 J, theory=2.54542197e-20 J
+[PASS] Wavefunction (m=3, n=1)
+[PASS] Probability density (m=3, n=1)
+[PASS] Normalization (m=3, n=1) — integral=1.00000000
+[PASS] Energy (m=3, n=2) — backend=3.67504711e-20 J, theory=3.67504711e-20 J
+[PASS] Wavefunction (m=3, n=2)
+[PASS] Probability density (m=3, n=2)
+[PASS] Normalization (m=3, n=2) — integral=1.00000000
+[PASS] Energy (m=3, n=3) — backend=5.55775567e-20 J, theory=5.55775567e-20 J
+[PASS] Wavefunction (m=3, n=3)
+[PASS] Probability density (m=3, n=3)
+[PASS] Normalization (m=3, n=3) — integral=1.00000000
+[PASS] Energy (m=3, n=4) — backend=8.19354766e-20 J, theory=8.19354766e-20 J
+[PASS] Wavefunction (m=3, n=4)
+[PASS] Probability density (m=3, n=4)
+[PASS] Normalization (m=3, n=4) — integral=1.00000000
+[PASS] Energy (m=3, n=5) — backend=1.15824231e-19 J, theory=1.15824231e-19 J
+[PASS] Wavefunction (m=3, n=5)
+[PASS] Probability density (m=3, n=5)
+[PASS] Normalization (m=3, n=5) — integral=1.00000000
+[PASS] Energy (m=4, n=1) — backend=4.23232884e-20 J, theory=4.23232884e-20 J
+[PASS] Wavefunction (m=4, n=1)
+[PASS] Probability density (m=4, n=1)
+[PASS] Normalization (m=4, n=1) — integral=1.00000000
+[PASS] Energy (m=4, n=2) — backend=5.36195398e-20 J, theory=5.36195398e-20 J
+[PASS] Wavefunction (m=4, n=2)
+[PASS] Probability density (m=4, n=2)
+[PASS] Normalization (m=4, n=2) — integral=1.00000000
+[PASS] Energy (m=4, n=3) — backend=7.24466254e-20 J, theory=7.24466254e-20 J
+[PASS] Wavefunction (m=4, n=3)
+[PASS] Probability density (m=4, n=3)
+[PASS] Normalization (m=4, n=3) — integral=1.00000000
+[PASS] Energy (m=4, n=4) — backend=9.88045453e-20 J, theory=9.88045453e-20 J
+[PASS] Wavefunction (m=4, n=4)
+[PASS] Probability density (m=4, n=4)
+[PASS] Normalization (m=4, n=4) — integral=1.00000000
+[PASS] Energy (m=4, n=5) — backend=1.32693299e-19 J, theory=1.32693299e-19 J
+[PASS] Wavefunction (m=4, n=5)
+[PASS] Probability density (m=4, n=5)
+[PASS] Normalization (m=4, n=5) — integral=1.00000000
+[PASS] Energy (m=5, n=1) — backend=6.40120911e-20 J, theory=6.40120911e-20 J
+[PASS] Wavefunction (m=5, n=1)
+[PASS] Probability density (m=5, n=1)
+[PASS] Normalization (m=5, n=1) — integral=1.00000000
+[PASS] Energy (m=5, n=2) — backend=7.53083424e-20 J, theory=7.53083424e-20 J
+[PASS] Wavefunction (m=5, n=2)
+[PASS] Probability density (m=5, n=2)
+[PASS] Normalization (m=5, n=2) — integral=1.00000000
+[PASS] Energy (m=5, n=3) — backend=9.41354280e-20 J, theory=9.41354280e-20 J
+[PASS] Wavefunction (m=5, n=3)
+[PASS] Probability density (m=5, n=3)
+[PASS] Normalization (m=5, n=3) — integral=1.00000000
+[PASS] Energy (m=5, n=4) — backend=1.20493348e-19 J, theory=1.20493348e-19 J
+[PASS] Wavefunction (m=5, n=4)
+[PASS] Probability density (m=5, n=4)
+[PASS] Normalization (m=5, n=4) — integral=1.00000000
+[PASS] Energy (m=5, n=5) — backend=1.54382102e-19 J, theory=1.54382102e-19 J
+[PASS] Wavefunction (m=5, n=5)
+[PASS] Probability density (m=5, n=5)
+[PASS] Normalization (m=5, n=5) — integral=1.00000000
+
+5. Boundary conditions
+[PASS] Boundary conditions state (1, 1) — max boundary |psi|=5.477e-08, relative boundary error=1.225e-16
+[PASS] Boundary conditions state (1, 2) — max boundary |psi|=1.095e-07, relative boundary error=2.449e-16
+[PASS] Boundary conditions state (1, 3) — max boundary |psi|=1.643e-07, relative boundary error=3.674e-16
+[PASS] Boundary conditions state (1, 4) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (1, 5) — max boundary |psi|=1.068e-06, relative boundary error=2.389e-15
+[PASS] Boundary conditions state (2, 1) — max boundary |psi|=1.095e-07, relative boundary error=2.449e-16
+[PASS] Boundary conditions state (2, 2) — max boundary |psi|=1.095e-07, relative boundary error=2.449e-16
+[PASS] Boundary conditions state (2, 3) — max boundary |psi|=1.643e-07, relative boundary error=3.674e-16
+[PASS] Boundary conditions state (2, 4) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (2, 5) — max boundary |psi|=1.068e-06, relative boundary error=2.389e-15
+[PASS] Boundary conditions state (3, 1) — max boundary |psi|=1.643e-07, relative boundary error=3.674e-16
+[PASS] Boundary conditions state (3, 2) — max boundary |psi|=1.643e-07, relative boundary error=3.674e-16
+[PASS] Boundary conditions state (3, 3) — max boundary |psi|=1.643e-07, relative boundary error=3.674e-16
+[PASS] Boundary conditions state (3, 4) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (3, 5) — max boundary |psi|=1.068e-06, relative boundary error=2.389e-15
+[PASS] Boundary conditions state (4, 1) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (4, 2) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (4, 3) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (4, 4) — max boundary |psi|=2.191e-07, relative boundary error=4.899e-16
+[PASS] Boundary conditions state (4, 5) — max boundary |psi|=1.068e-06, relative boundary error=2.389e-15
+[PASS] Boundary conditions state (5, 1) — max boundary |psi|=2.738e-07, relative boundary error=6.123e-16
+[PASS] Boundary conditions state (5, 2) — max boundary |psi|=2.738e-07, relative boundary error=6.123e-16
+[PASS] Boundary conditions state (5, 3) — max boundary |psi|=2.738e-07, relative boundary error=6.123e-16
+[PASS] Boundary conditions state (5, 4) — max boundary |psi|=2.738e-07, relative boundary error=6.123e-16
+[PASS] Boundary conditions state (5, 5) — max boundary |psi|=1.068e-06, relative boundary error=2.389e-15
+
+6. Orthogonality of distinct states
+[PASS] Orthogonality (1, 1) vs (1, 2) — overlap=0.000e+00
+[PASS] Orthogonality (1, 1) vs (1, 3) — overlap=0.000e+00
+[PASS] Orthogonality (1, 1) vs (1, 4) — overlap=-5.551e-17
+[PASS] Orthogonality (1, 1) vs (1, 5) — overlap=-6.939e-18
+[PASS] Orthogonality (1, 1) vs (2, 1) — overlap=-4.196e-18
+[PASS] Orthogonality (1, 1) vs (2, 2) — overlap=-5.901e-19
+[PASS] Orthogonality (1, 1) vs (2, 3) — overlap=-7.045e-19
+[PASS] Orthogonality (1, 1) vs (2, 4) — overlap=-9.467e-19
+[PASS] Orthogonality (1, 1) vs (2, 5) — overlap=-4.051e-18
+[PASS] Orthogonality (1, 1) vs (3, 1) — overlap=-1.107e-17
+[PASS] Orthogonality (1, 1) vs (3, 2) — overlap=-6.109e-19
+[PASS] Orthogonality (1, 1) vs (3, 3) — overlap=-1.705e-18
+[PASS] Orthogonality (1, 1) vs (3, 4) — overlap=-1.408e-18
+[PASS] Orthogonality (1, 1) vs (3, 5) — overlap=1.684e-20
+[PASS] Orthogonality (1, 1) vs (4, 1) — overlap=-1.454e-17
+[PASS] Orthogonality (1, 1) vs (4, 2) — overlap=-8.650e-19
+[PASS] Orthogonality (1, 1) vs (4, 3) — overlap=-3.894e-18
+[PASS] Orthogonality (1, 1) vs (4, 4) — overlap=7.607e-19
+[PASS] Orthogonality (1, 1) vs (4, 5) — overlap=4.300e-18
+[PASS] Orthogonality (1, 1) vs (5, 1) — overlap=-1.727e-17
+[PASS] Orthogonality (1, 1) vs (5, 2) — overlap=-3.458e-19
+[PASS] Orthogonality (1, 1) vs (5, 3) — overlap=-5.143e-20
+[PASS] Orthogonality (1, 1) vs (5, 4) — overlap=-2.368e-19
+[PASS] Orthogonality (1, 1) vs (5, 5) — overlap=-1.896e-19
+[PASS] Orthogonality (1, 2) vs (1, 3) — overlap=0.000e+00
+[PASS] Orthogonality (1, 2) vs (1, 4) — overlap=2.776e-17
+[PASS] Orthogonality (1, 2) vs (1, 5) — overlap=0.000e+00
+[PASS] Orthogonality (1, 2) vs (2, 1) — overlap=-4.020e-18
+[PASS] Orthogonality (1, 2) vs (2, 2) — overlap=-7.184e-18
+[PASS] Orthogonality (1, 2) vs (2, 3) — overlap=-6.886e-19
+[PASS] Orthogonality (1, 2) vs (2, 4) — overlap=-3.413e-18
+[PASS] Orthogonality (1, 2) vs (2, 5) — overlap=-3.206e-18
+[PASS] Orthogonality (1, 2) vs (3, 1) — overlap=-1.011e-18
+[PASS] Orthogonality (1, 2) vs (3, 2) — overlap=-1.238e-17
+[PASS] Orthogonality (1, 2) vs (3, 3) — overlap=-2.060e-18
+[PASS] Orthogonality (1, 2) vs (3, 4) — overlap=-1.045e-18
+[PASS] Orthogonality (1, 2) vs (3, 5) — overlap=1.005e-18
+[PASS] Orthogonality (1, 2) vs (4, 1) — overlap=-1.596e-18
+[PASS] Orthogonality (1, 2) vs (4, 2) — overlap=-1.485e-17
+[PASS] Orthogonality (1, 2) vs (4, 3) — overlap=-3.091e-18
+[PASS] Orthogonality (1, 2) vs (4, 4) — overlap=-5.910e-19
+[PASS] Orthogonality (1, 2) vs (4, 5) — overlap=-2.346e-19
+[PASS] Orthogonality (1, 2) vs (5, 1) — overlap=6.514e-19
+[PASS] Orthogonality (1, 2) vs (5, 2) — overlap=-1.508e-17
+[PASS] Orthogonality (1, 2) vs (5, 3) — overlap=7.158e-21
+[PASS] Orthogonality (1, 2) vs (5, 4) — overlap=-3.191e-19
+[PASS] Orthogonality (1, 2) vs (5, 5) — overlap=-7.859e-19
+[PASS] Orthogonality (1, 3) vs (1, 4) — overlap=0.000e+00
+[PASS] Orthogonality (1, 3) vs (1, 5) — overlap=5.551e-17
+[PASS] Orthogonality (1, 3) vs (2, 1) — overlap=5.033e-19
+[PASS] Orthogonality (1, 3) vs (2, 2) — overlap=-7.309e-19
+[PASS] Orthogonality (1, 3) vs (2, 3) — overlap=-4.257e-18
+[PASS] Orthogonality (1, 3) vs (2, 4) — overlap=-1.436e-18
+[PASS] Orthogonality (1, 3) vs (2, 5) — overlap=4.143e-18
+[PASS] Orthogonality (1, 3) vs (3, 1) — overlap=-8.627e-19
+[PASS] Orthogonality (1, 3) vs (3, 2) — overlap=-1.894e-18
+[PASS] Orthogonality (1, 3) vs (3, 3) — overlap=-9.150e-18
+[PASS] Orthogonality (1, 3) vs (3, 4) — overlap=-4.908e-19
+[PASS] Orthogonality (1, 3) vs (3, 5) — overlap=-1.952e-18
+[PASS] Orthogonality (1, 3) vs (4, 1) — overlap=-1.878e-19
+[PASS] Orthogonality (1, 3) vs (4, 2) — overlap=-2.029e-18
+[PASS] Orthogonality (1, 3) vs (4, 3) — overlap=-1.063e-17
+[PASS] Orthogonality (1, 3) vs (4, 4) — overlap=1.064e-18
+[PASS] Orthogonality (1, 3) vs (4, 5) — overlap=9.344e-19
+[PASS] Orthogonality (1, 3) vs (5, 1) — overlap=-4.497e-19
+[PASS] Orthogonality (1, 3) vs (5, 2) — overlap=7.973e-19
+[PASS] Orthogonality (1, 3) vs (5, 3) — overlap=-1.645e-17
+[PASS] Orthogonality (1, 3) vs (5, 4) — overlap=2.889e-19
+[PASS] Orthogonality (1, 3) vs (5, 5) — overlap=1.754e-18
+[PASS] Orthogonality (1, 4) vs (1, 5) — overlap=5.551e-17
+[PASS] Orthogonality (1, 4) vs (2, 1) — overlap=-1.966e-18
+[PASS] Orthogonality (1, 4) vs (2, 2) — overlap=-1.435e-18
+[PASS] Orthogonality (1, 4) vs (2, 3) — overlap=1.101e-18
+[PASS] Orthogonality (1, 4) vs (2, 4) — overlap=-1.417e-17
+[PASS] Orthogonality (1, 4) vs (2, 5) — overlap=1.707e-18
+[PASS] Orthogonality (1, 4) vs (3, 1) — overlap=-1.482e-18
+[PASS] Orthogonality (1, 4) vs (3, 2) — overlap=-1.669e-18
+[PASS] Orthogonality (1, 4) vs (3, 3) — overlap=1.567e-18
+[PASS] Orthogonality (1, 4) vs (3, 4) — overlap=-8.724e-18
+[PASS] Orthogonality (1, 4) vs (3, 5) — overlap=-8.060e-19
+[PASS] Orthogonality (1, 4) vs (4, 1) — overlap=-3.615e-19
+[PASS] Orthogonality (1, 4) vs (4, 2) — overlap=-3.989e-19
+[PASS] Orthogonality (1, 4) vs (4, 3) — overlap=-1.219e-18
+[PASS] Orthogonality (1, 4) vs (4, 4) — overlap=-7.845e-18
+[PASS] Orthogonality (1, 4) vs (4, 5) — overlap=-4.905e-19
+[PASS] Orthogonality (1, 4) vs (5, 1) — overlap=1.240e-18
+[PASS] Orthogonality (1, 4) vs (5, 2) — overlap=4.029e-19
+[PASS] Orthogonality (1, 4) vs (5, 3) — overlap=1.901e-18
+[PASS] Orthogonality (1, 4) vs (5, 4) — overlap=-1.682e-17
+[PASS] Orthogonality (1, 4) vs (5, 5) — overlap=-6.989e-20
+[PASS] Orthogonality (1, 5) vs (2, 1) — overlap=2.445e-20
+[PASS] Orthogonality (1, 5) vs (2, 2) — overlap=-1.123e-18
+[PASS] Orthogonality (1, 5) vs (2, 3) — overlap=8.149e-21
+[PASS] Orthogonality (1, 5) vs (2, 4) — overlap=2.026e-19
+[PASS] Orthogonality (1, 5) vs (2, 5) — overlap=-1.097e-17
+[PASS] Orthogonality (1, 5) vs (3, 1) — overlap=-2.996e-19
+[PASS] Orthogonality (1, 5) vs (3, 2) — overlap=1.724e-18
+[PASS] Orthogonality (1, 5) vs (3, 3) — overlap=-1.168e-18
+[PASS] Orthogonality (1, 5) vs (3, 4) — overlap=-2.850e-18
+[PASS] Orthogonality (1, 5) vs (3, 5) — overlap=-1.062e-17
+[PASS] Orthogonality (1, 5) vs (4, 1) — overlap=3.721e-18
+[PASS] Orthogonality (1, 5) vs (4, 2) — overlap=1.466e-19
+[PASS] Orthogonality (1, 5) vs (4, 3) — overlap=8.472e-19
+[PASS] Orthogonality (1, 5) vs (4, 4) — overlap=-6.738e-20
+[PASS] Orthogonality (1, 5) vs (4, 5) — overlap=-1.125e-17
+[PASS] Orthogonality (1, 5) vs (5, 1) — overlap=6.452e-19
+[PASS] Orthogonality (1, 5) vs (5, 2) — overlap=5.116e-19
+[PASS] Orthogonality (1, 5) vs (5, 3) — overlap=2.516e-19
+[PASS] Orthogonality (1, 5) vs (5, 4) — overlap=3.611e-19
+[PASS] Orthogonality (1, 5) vs (5, 5) — overlap=-1.758e-17
+[PASS] Orthogonality (2, 1) vs (2, 2) — overlap=5.551e-17
+[PASS] Orthogonality (2, 1) vs (2, 3) — overlap=2.776e-17
+[PASS] Orthogonality (2, 1) vs (2, 4) — overlap=-5.551e-17
+[PASS] Orthogonality (2, 1) vs (2, 5) — overlap=-6.939e-18
+[PASS] Orthogonality (2, 1) vs (3, 1) — overlap=3.470e-17
+[PASS] Orthogonality (2, 1) vs (3, 2) — overlap=2.126e-18
+[PASS] Orthogonality (2, 1) vs (3, 3) — overlap=-1.079e-18
+[PASS] Orthogonality (2, 1) vs (3, 4) — overlap=8.792e-19
+[PASS] Orthogonality (2, 1) vs (3, 5) — overlap=2.274e-18
+[PASS] Orthogonality (2, 1) vs (4, 1) — overlap=-5.690e-18
+[PASS] Orthogonality (2, 1) vs (4, 2) — overlap=2.267e-18
+[PASS] Orthogonality (2, 1) vs (4, 3) — overlap=-4.527e-18
+[PASS] Orthogonality (2, 1) vs (4, 4) — overlap=-1.088e-18
+[PASS] Orthogonality (2, 1) vs (4, 5) — overlap=-1.783e-18
+[PASS] Orthogonality (2, 1) vs (5, 1) — overlap=-1.098e-17
+[PASS] Orthogonality (2, 1) vs (5, 2) — overlap=1.210e-18
+[PASS] Orthogonality (2, 1) vs (5, 3) — overlap=1.586e-18
+[PASS] Orthogonality (2, 1) vs (5, 4) — overlap=5.088e-19
+[PASS] Orthogonality (2, 1) vs (5, 5) — overlap=-1.198e-18
+[PASS] Orthogonality (2, 2) vs (2, 3) — overlap=0.000e+00
+[PASS] Orthogonality (2, 2) vs (2, 4) — overlap=5.551e-17
+[PASS] Orthogonality (2, 2) vs (2, 5) — overlap=2.776e-17
+[PASS] Orthogonality (2, 2) vs (3, 1) — overlap=-8.157e-19
+[PASS] Orthogonality (2, 2) vs (3, 2) — overlap=3.903e-17
+[PASS] Orthogonality (2, 2) vs (3, 3) — overlap=2.328e-18
+[PASS] Orthogonality (2, 2) vs (3, 4) — overlap=1.189e-18
+[PASS] Orthogonality (2, 2) vs (3, 5) — overlap=-1.672e-19
+[PASS] Orthogonality (2, 2) vs (4, 1) — overlap=4.311e-19
+[PASS] Orthogonality (2, 2) vs (4, 2) — overlap=-1.869e-18
+[PASS] Orthogonality (2, 2) vs (4, 3) — overlap=4.927e-19
+[PASS] Orthogonality (2, 2) vs (4, 4) — overlap=2.039e-18
+[PASS] Orthogonality (2, 2) vs (4, 5) — overlap=-2.119e-19
+[PASS] Orthogonality (2, 2) vs (5, 1) — overlap=-1.746e-18
+[PASS] Orthogonality (2, 2) vs (5, 2) — overlap=-9.937e-18
+[PASS] Orthogonality (2, 2) vs (5, 3) — overlap=4.438e-19
+[PASS] Orthogonality (2, 2) vs (5, 4) — overlap=1.484e-18
+[PASS] Orthogonality (2, 2) vs (5, 5) — overlap=8.197e-19
+[PASS] Orthogonality (2, 3) vs (2, 4) — overlap=0.000e+00
+[PASS] Orthogonality (2, 3) vs (2, 5) — overlap=5.551e-17
+[PASS] Orthogonality (2, 3) vs (3, 1) — overlap=-3.016e-18
+[PASS] Orthogonality (2, 3) vs (3, 2) — overlap=2.902e-19
+[PASS] Orthogonality (2, 3) vs (3, 3) — overlap=3.567e-17
+[PASS] Orthogonality (2, 3) vs (3, 4) — overlap=-1.493e-18
+[PASS] Orthogonality (2, 3) vs (3, 5) — overlap=1.182e-18
+[PASS] Orthogonality (2, 3) vs (4, 1) — overlap=1.473e-18
+[PASS] Orthogonality (2, 3) vs (4, 2) — overlap=-2.050e-18
+[PASS] Orthogonality (2, 3) vs (4, 3) — overlap=-5.486e-18
+[PASS] Orthogonality (2, 3) vs (4, 4) — overlap=-1.593e-18
+[PASS] Orthogonality (2, 3) vs (4, 5) — overlap=-1.825e-18
+[PASS] Orthogonality (2, 3) vs (5, 1) — overlap=2.146e-18
+[PASS] Orthogonality (2, 3) vs (5, 2) — overlap=-9.252e-19
+[PASS] Orthogonality (2, 3) vs (5, 3) — overlap=-1.072e-17
+[PASS] Orthogonality (2, 3) vs (5, 4) — overlap=-3.981e-19
+[PASS] Orthogonality (2, 3) vs (5, 5) — overlap=-7.676e-19
+[PASS] Orthogonality (2, 4) vs (2, 5) — overlap=5.551e-17
+[PASS] Orthogonality (2, 4) vs (3, 1) — overlap=-7.716e-19
+[PASS] Orthogonality (2, 4) vs (3, 2) — overlap=-2.246e-18
+[PASS] Orthogonality (2, 4) vs (3, 3) — overlap=-1.146e-18
+[PASS] Orthogonality (2, 4) vs (3, 4) — overlap=4.083e-17
+[PASS] Orthogonality (2, 4) vs (3, 5) — overlap=-1.573e-18
+[PASS] Orthogonality (2, 4) vs (4, 1) — overlap=-9.877e-19
+[PASS] Orthogonality (2, 4) vs (4, 2) — overlap=1.759e-18
+[PASS] Orthogonality (2, 4) vs (4, 3) — overlap=-4.076e-19
+[PASS] Orthogonality (2, 4) vs (4, 4) — overlap=-9.313e-18
+[PASS] Orthogonality (2, 4) vs (4, 5) — overlap=-1.793e-18
+[PASS] Orthogonality (2, 4) vs (5, 1) — overlap=1.826e-18
+[PASS] Orthogonality (2, 4) vs (5, 2) — overlap=-1.927e-19
+[PASS] Orthogonality (2, 4) vs (5, 3) — overlap=-1.376e-18
+[PASS] Orthogonality (2, 4) vs (5, 4) — overlap=-8.661e-18
+[PASS] Orthogonality (2, 4) vs (5, 5) — overlap=-8.439e-19
+[PASS] Orthogonality (2, 5) vs (3, 1) — overlap=1.603e-18
+[PASS] Orthogonality (2, 5) vs (3, 2) — overlap=-1.759e-18
+[PASS] Orthogonality (2, 5) vs (3, 3) — overlap=-1.086e-18
+[PASS] Orthogonality (2, 5) vs (3, 4) — overlap=-8.530e-19
+[PASS] Orthogonality (2, 5) vs (3, 5) — overlap=3.892e-17
+[PASS] Orthogonality (2, 5) vs (4, 1) — overlap=-3.577e-18
+[PASS] Orthogonality (2, 5) vs (4, 2) — overlap=-2.372e-18
+[PASS] Orthogonality (2, 5) vs (4, 3) — overlap=-1.816e-18
+[PASS] Orthogonality (2, 5) vs (4, 4) — overlap=-2.791e-18
+[PASS] Orthogonality (2, 5) vs (4, 5) — overlap=-5.677e-18
+[PASS] Orthogonality (2, 5) vs (5, 1) — overlap=-1.346e-19
+[PASS] Orthogonality (2, 5) vs (5, 2) — overlap=-4.093e-19
+[PASS] Orthogonality (2, 5) vs (5, 3) — overlap=-2.452e-18
+[PASS] Orthogonality (2, 5) vs (5, 4) — overlap=7.324e-19
+[PASS] Orthogonality (2, 5) vs (5, 5) — overlap=-1.271e-17
+[PASS] Orthogonality (3, 1) vs (3, 2) — overlap=5.551e-17
+[PASS] Orthogonality (3, 1) vs (3, 3) — overlap=5.551e-17
+[PASS] Orthogonality (3, 1) vs (3, 4) — overlap=0.000e+00
+[PASS] Orthogonality (3, 1) vs (3, 5) — overlap=0.000e+00
+[PASS] Orthogonality (3, 1) vs (4, 1) — overlap=8.420e-18
+[PASS] Orthogonality (3, 1) vs (4, 2) — overlap=-9.920e-19
+[PASS] Orthogonality (3, 1) vs (4, 3) — overlap=3.254e-18
+[PASS] Orthogonality (3, 1) vs (4, 4) — overlap=2.829e-18
+[PASS] Orthogonality (3, 1) vs (4, 5) — overlap=-5.400e-19
+[PASS] Orthogonality (3, 1) vs (5, 1) — overlap=-7.410e-18
+[PASS] Orthogonality (3, 1) vs (5, 2) — overlap=-1.621e-18
+[PASS] Orthogonality (3, 1) vs (5, 3) — overlap=-1.043e-18
+[PASS] Orthogonality (3, 1) vs (5, 4) — overlap=4.760e-19
+[PASS] Orthogonality (3, 1) vs (5, 5) — overlap=1.969e-18
+[PASS] Orthogonality (3, 2) vs (3, 3) — overlap=0.000e+00
+[PASS] Orthogonality (3, 2) vs (3, 4) — overlap=2.776e-17
+[PASS] Orthogonality (3, 2) vs (3, 5) — overlap=2.776e-17
+[PASS] Orthogonality (3, 2) vs (4, 1) — overlap=2.372e-20
+[PASS] Orthogonality (3, 2) vs (4, 2) — overlap=6.832e-18
+[PASS] Orthogonality (3, 2) vs (4, 3) — overlap=9.350e-19
+[PASS] Orthogonality (3, 2) vs (4, 4) — overlap=-2.295e-18
+[PASS] Orthogonality (3, 2) vs (4, 5) — overlap=-5.489e-19
+[PASS] Orthogonality (3, 2) vs (5, 1) — overlap=-1.831e-18
+[PASS] Orthogonality (3, 2) vs (5, 2) — overlap=-8.924e-18
+[PASS] Orthogonality (3, 2) vs (5, 3) — overlap=5.485e-19
+[PASS] Orthogonality (3, 2) vs (5, 4) — overlap=-1.025e-18
+[PASS] Orthogonality (3, 2) vs (5, 5) — overlap=9.268e-19
+[PASS] Orthogonality (3, 3) vs (3, 4) — overlap=0.000e+00
+[PASS] Orthogonality (3, 3) vs (3, 5) — overlap=2.776e-17
+[PASS] Orthogonality (3, 3) vs (4, 1) — overlap=3.218e-18
+[PASS] Orthogonality (3, 3) vs (4, 2) — overlap=-4.226e-19
+[PASS] Orthogonality (3, 3) vs (4, 3) — overlap=8.509e-18
+[PASS] Orthogonality (3, 3) vs (4, 4) — overlap=2.730e-18
+[PASS] Orthogonality (3, 3) vs (4, 5) — overlap=4.846e-19
+[PASS] Orthogonality (3, 3) vs (5, 1) — overlap=-6.799e-20
+[PASS] Orthogonality (3, 3) vs (5, 2) — overlap=7.468e-19
+[PASS] Orthogonality (3, 3) vs (5, 3) — overlap=-6.318e-18
+[PASS] Orthogonality (3, 3) vs (5, 4) — overlap=1.421e-18
+[PASS] Orthogonality (3, 3) vs (5, 5) — overlap=-2.619e-18
+[PASS] Orthogonality (3, 4) vs (3, 5) — overlap=0.000e+00
+[PASS] Orthogonality (3, 4) vs (4, 1) — overlap=1.822e-18
+[PASS] Orthogonality (3, 4) vs (4, 2) — overlap=-2.246e-18
+[PASS] Orthogonality (3, 4) vs (4, 3) — overlap=2.645e-18
+[PASS] Orthogonality (3, 4) vs (4, 4) — overlap=8.955e-18
+[PASS] Orthogonality (3, 4) vs (4, 5) — overlap=6.630e-19
+[PASS] Orthogonality (3, 4) vs (5, 1) — overlap=1.376e-18
+[PASS] Orthogonality (3, 4) vs (5, 2) — overlap=-4.957e-19
+[PASS] Orthogonality (3, 4) vs (5, 3) — overlap=1.792e-18
+[PASS] Orthogonality (3, 4) vs (5, 4) — overlap=-9.734e-18
+[PASS] Orthogonality (3, 4) vs (5, 5) — overlap=7.213e-19
+[PASS] Orthogonality (3, 5) vs (4, 1) — overlap=-2.760e-18
+[PASS] Orthogonality (3, 5) vs (4, 2) — overlap=-1.317e-18
+[PASS] Orthogonality (3, 5) vs (4, 3) — overlap=-1.732e-19
+[PASS] Orthogonality (3, 5) vs (4, 4) — overlap=-8.231e-19
+[PASS] Orthogonality (3, 5) vs (4, 5) — overlap=7.093e-18
+[PASS] Orthogonality (3, 5) vs (5, 1) — overlap=1.020e-18
+[PASS] Orthogonality (3, 5) vs (5, 2) — overlap=6.027e-19
+[PASS] Orthogonality (3, 5) vs (5, 3) — overlap=-1.434e-18
+[PASS] Orthogonality (3, 5) vs (5, 4) — overlap=4.849e-19
+[PASS] Orthogonality (3, 5) vs (5, 5) — overlap=-3.619e-18
+[PASS] Orthogonality (4, 1) vs (4, 2) — overlap=0.000e+00
+[PASS] Orthogonality (4, 1) vs (4, 3) — overlap=0.000e+00
+[PASS] Orthogonality (4, 1) vs (4, 4) — overlap=-8.327e-17
+[PASS] Orthogonality (4, 1) vs (4, 5) — overlap=-6.939e-18
+[PASS] Orthogonality (4, 1) vs (5, 1) — overlap=2.280e-18
+[PASS] Orthogonality (4, 1) vs (5, 2) — overlap=1.541e-18
+[PASS] Orthogonality (4, 1) vs (5, 3) — overlap=-2.522e-18
+[PASS] Orthogonality (4, 1) vs (5, 4) — overlap=9.189e-19
+[PASS] Orthogonality (4, 1) vs (5, 5) — overlap=-1.282e-18
+[PASS] Orthogonality (4, 2) vs (4, 3) — overlap=5.551e-17
+[PASS] Orthogonality (4, 2) vs (4, 4) — overlap=2.776e-17
+[PASS] Orthogonality (4, 2) vs (4, 5) — overlap=0.000e+00
+[PASS] Orthogonality (4, 2) vs (5, 1) — overlap=-2.919e-18
+[PASS] Orthogonality (4, 2) vs (5, 2) — overlap=3.616e-19
+[PASS] Orthogonality (4, 2) vs (5, 3) — overlap=-8.117e-19
+[PASS] Orthogonality (4, 2) vs (5, 4) — overlap=1.100e-18
+[PASS] Orthogonality (4, 2) vs (5, 5) — overlap=1.522e-18
+[PASS] Orthogonality (4, 3) vs (4, 4) — overlap=0.000e+00
+[PASS] Orthogonality (4, 3) vs (4, 5) — overlap=5.551e-17
+[PASS] Orthogonality (4, 3) vs (5, 1) — overlap=-2.644e-18
+[PASS] Orthogonality (4, 3) vs (5, 2) — overlap=-5.768e-19
+[PASS] Orthogonality (4, 3) vs (5, 3) — overlap=5.034e-18
+[PASS] Orthogonality (4, 3) vs (5, 4) — overlap=1.014e-18
+[PASS] Orthogonality (4, 3) vs (5, 5) — overlap=7.196e-19
+[PASS] Orthogonality (4, 4) vs (4, 5) — overlap=5.551e-17
+[PASS] Orthogonality (4, 4) vs (5, 1) — overlap=1.077e-20
+[PASS] Orthogonality (4, 4) vs (5, 2) — overlap=-1.204e-18
+[PASS] Orthogonality (4, 4) vs (5, 3) — overlap=-1.219e-18
+[PASS] Orthogonality (4, 4) vs (5, 4) — overlap=1.098e-18
+[PASS] Orthogonality (4, 4) vs (5, 5) — overlap=4.265e-18
+[PASS] Orthogonality (4, 5) vs (5, 1) — overlap=-1.215e-18
+[PASS] Orthogonality (4, 5) vs (5, 2) — overlap=2.258e-18
+[PASS] Orthogonality (4, 5) vs (5, 3) — overlap=-1.572e-20
+[PASS] Orthogonality (4, 5) vs (5, 4) — overlap=1.001e-18
+[PASS] Orthogonality (4, 5) vs (5, 5) — overlap=3.396e-18
+[PASS] Orthogonality (5, 1) vs (5, 2) — overlap=1.110e-16
+[PASS] Orthogonality (5, 1) vs (5, 3) — overlap=5.551e-17
+[PASS] Orthogonality (5, 1) vs (5, 4) — overlap=0.000e+00
+[PASS] Orthogonality (5, 1) vs (5, 5) — overlap=-6.939e-18
+[PASS] Orthogonality (5, 2) vs (5, 3) — overlap=0.000e+00
+[PASS] Orthogonality (5, 2) vs (5, 4) — overlap=2.776e-17
+[PASS] Orthogonality (5, 2) vs (5, 5) — overlap=4.163e-17
+[PASS] Orthogonality (5, 3) vs (5, 4) — overlap=0.000e+00
+[PASS] Orthogonality (5, 3) vs (5, 5) — overlap=2.776e-17
+[PASS] Orthogonality (5, 4) vs (5, 5) — overlap=5.551e-17
+
+7. Time-independent Schrödinger equation inside the well
+[PASS] Schrödinger equation state (1, 1) — relative finite-difference residual=5.140e-06
+[PASS] Schrödinger equation state (1, 2) — relative finite-difference residual=1.843e-05
+[PASS] Schrödinger equation state (1, 3) — relative finite-difference residual=4.353e-05
+[PASS] Schrödinger equation state (1, 4) — relative finite-difference residual=7.928e-05
+[PASS] Schrödinger equation state (1, 5) — relative finite-difference residual=1.254e-04
+[PASS] Schrödinger equation state (2, 1) — relative finite-difference residual=1.623e-05
+[PASS] Schrödinger equation state (2, 2) — relative finite-difference residual=2.056e-05
+[PASS] Schrödinger equation state (2, 3) — relative finite-difference residual=4.057e-05
+[PASS] Schrödinger equation state (2, 4) — relative finite-difference residual=7.374e-05
+[PASS] Schrödinger equation state (2, 5) — relative finite-difference residual=1.185e-04
+[PASS] Schrödinger equation state (3, 1) — relative finite-difference residual=4.018e-05
+[PASS] Schrödinger equation state (3, 2) — relative finite-difference residual=3.573e-05
+[PASS] Schrödinger equation state (3, 3) — relative finite-difference residual=4.626e-05
+[PASS] Schrödinger equation state (3, 4) — relative finite-difference residual=7.272e-05
+[PASS] Schrödinger equation state (3, 5) — relative finite-difference residual=1.131e-04
+[PASS] Schrödinger equation state (4, 1) — relative finite-difference residual=7.538e-05
+[PASS] Schrödinger equation state (4, 2) — relative finite-difference residual=6.492e-05
+[PASS] Schrödinger equation state (4, 3) — relative finite-difference residual=6.541e-05
+[PASS] Schrödinger equation state (4, 4) — relative finite-difference residual=8.224e-05
+[PASS] Schrödinger equation state (4, 5) — relative finite-difference residual=1.151e-04
+[PASS] Schrödinger equation state (5, 1) — relative finite-difference residual=1.212e-04
+[PASS] Schrödinger equation state (5, 2) — relative finite-difference residual=1.069e-04
+[PASS] Schrödinger equation state (5, 3) — relative finite-difference residual=9.890e-05
+[PASS] Schrödinger equation state (5, 4) — relative finite-difference residual=1.054e-04
+[PASS] Schrödinger equation state (5, 5) — relative finite-difference residual=1.285e-04
+
+8. Full run and plot generation
+
+======================================================================
+RECTANGULAR INFINITE POTENTIAL WELL
+======================================================================
+
+Potential:
+V(x,y) = 0 inside the rectangle
+V(x,y) = infinity outside the rectangle
+
+Time-independent Schrodinger equation:
+-hbar^2/(2M) * (d²psi/dx² + d²psi/dy²) = E psi
+
+Boundary conditions:
+psi(0,y) = psi(a,y) = 0
+psi(x,0) = psi(x,b) = 0
+
+Normalized wavefunction:
+psi_mn(x,y) = sqrt(4/(ab))
+              * sin(m*pi*x/a) * sin(n*pi*y/b)
+
+Energy:
+E_mn = (pi² hbar² / 2M)
+       * (m²/a² + n²/b²)
+
+============================================================
+LOWEST ENERGY STATES
+============================================================
+State   m     n     Energy (J)          
+------------------------------------------------------------
+1       1     1     6.175284e-21        
+2       2     1     1.340488e-20        
+3       1     2     1.747154e-20        
+4       2     2     2.470114e-20        
+5       3     1     2.545422e-20        
+6       1     3     3.629862e-20        
+
+Normalization check:
+--------------------------------------------------
+(m,n)=(1,1)    integral |psi|² dxdy = 1.000000
+(m,n)=(2,1)    integral |psi|² dxdy = 1.000000
+(m,n)=(1,2)    integral |psi|² dxdy = 1.000000
+(m,n)=(2,2)    integral |psi|² dxdy = 1.000000
+(m,n)=(3,1)    integral |psi|² dxdy = 1.000000
+(m,n)=(1,3)    integral |psi|² dxdy = 1.000000
+[PASS] run_rectangle returns expected fields
+[PASS] Plot generated: energy_plot — rectangle_test_plots/rectangle_levels.png
+[PASS] Plot generated: psi_plot — rectangle_test_plots/rectangle_psi.png
+[PASS] Plot generated: rho_plot — rectangle_test_plots/rectangle_rho.png
+
+============================================================================
+TEST SUMMARY: 454 passed, 0 failed
+============================================================================
+
+Scope note: These tests check implementation against the standard rectangular infinite-well model. They cannot prove the derivation of Schrödinger's equation or establish that this model suits every physical system.
