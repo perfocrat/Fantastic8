@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d19">
+    <title>Quantum Well Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" id="brand-home" href="#geometry-landing" aria-label="Quantum Well Explorer home">
+                <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="brand-name">Quantum Well <span>Explorer</span></span>
+            </a>
+            <div class="topbar-meta">
+                <span class="connection-status" id="backend-status"><span></span> Connecting to solver</span>
+                <span class="topbar-divider" aria-hidden="true"></span>
+                <span class="version-label">EXPLORER <b>01</b></span>
+            </div>
+        </header>
+
+        <main class="landing-screen" id="geometry-landing" aria-labelledby="landing-title">
+            <div class="landing-orbit orbit-one" aria-hidden="true"></div>
+            <div class="landing-orbit orbit-two" aria-hidden="true"></div>
+            <div class="landing-inner">
+                <div class="landing-heading">
+                    <div class="section-kicker">A VISUAL LAB FOR QUANTUM SYSTEMS</div>
+                    <h1 id="landing-title">Quantum Well <span>Explorer</span></h1>
+                    <p>Choose a geometry to open its state visualization workspace.</p>
+                </div>
+                <div class="landing-section-label"><span>SELECT A WELL GEOMETRY</span><span>06 PROFILES</span></div>
+                <div class="geometry-card-grid" role="group" aria-label="Choose a geometry">
+                    <button class="geometry-card" type="button" data-geometry="rectangle">
+                        <span class="card-number">01</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><rect x="23" y="19" width="54" height="36" rx="2" /></svg></span>
+                        <span class="card-title">Rectangle</span><span class="card-detail">Planar well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-card" type="button" data-geometry="triangle">
+                        <span class="card-number">02</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><path d="M50 13 79 61H21L50 13Z" /></svg></span>
+                        <span class="card-title">Equilateral Triangle</span><span class="card-detail">Three-sided well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-card" type="button" data-geometry="circle">
+                        <span class="card-number">03</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><circle cx="50" cy="37" r="23" /></svg></span>
+                        <span class="card-title">Circle</span><span class="card-detail">Radial well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-card" type="button" data-geometry="sector">
+                        <span class="card-number">04</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><path d="M50 37V13a24 24 0 0 1 24 24H50Z" /><path d="M50 37 33 54" /></svg></span>
+                        <span class="card-title">Circular Sector</span><span class="card-detail">Angular well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-card" type="button" data-geometry="annulus">
+                        <span class="card-number">05</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><circle cx="50" cy="37" r="24" /><circle cx="50" cy="37" r="11" /></svg></span>
+                        <span class="card-title">Annulus</span><span class="card-detail">Ring-shaped well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-card" type="button" data-geometry="ellipse">
+                        <span class="card-number">06</span>
+                        <span class="card-illustration"><svg viewBox="0 0 100 74" aria-hidden="true"><ellipse cx="50" cy="37" rx="32" ry="20" /></svg></span>
+                        <span class="card-title">Ellipse</span><span class="card-detail">Extended radial well</span><span class="card-arrow" aria-hidden="true">↗</span>
+                    </button>
+                </div>
+                <div class="landing-footer"><span>LOCAL PHYSICS MODEL</span><span>SIX SHAPE-SPECIFIC SOLVERS <i></i></span></div>
+            </div>
+        </main>
+
+        <div class="app-layout" id="workspace" hidden>
+            <aside class="geometry-sidebar" aria-labelledby="geometry-heading">
+                <div class="section-kicker">MODEL SETUP <span>01</span></div>
+                <h2 id="geometry-heading">Choose a geometry</h2>
+                <p class="sidebar-intro">Select a well profile to configure the model.</p>
+
+                <div class="geometry-list" role="group" aria-label="Well geometry">
+                    <button class="geometry-option is-active" type="button" data-geometry="rectangle" aria-pressed="true">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="1" /></svg></span>
+                        <span>Rectangle</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-option" type="button" data-geometry="triangle" aria-pressed="false">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5 20 19H4L12 5Z" /></svg></span>
+                        <span>Equilateral Triangle</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-option" type="button" data-geometry="circle" aria-pressed="false">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" /></svg></span>
+                        <span>Circle</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-option" type="button" data-geometry="sector" aria-pressed="false">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12V5a7 7 0 0 1 7 7h-7Z" /><path d="M12 12 7 17" /></svg></span>
+                        <span>Circular Sector</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-option" type="button" data-geometry="annulus" aria-pressed="false">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="3" /></svg></span>
+                        <span>Annulus</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <button class="geometry-option" type="button" data-geometry="ellipse" aria-pressed="false">
+                        <span class="geometry-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5" /></svg></span>
+                        <span>Ellipse</span><span class="option-arrow" aria-hidden="true">↗</span>
+                    </button>
+                </div>
+
+                <div class="sidebar-footnote">
+                    <span class="footnote-mark" aria-hidden="true">i</span>
+                    <p>Each calculation uses the selected shape's physics solver.</p>
+                </div>
+            </aside>
+
+            <main class="main-workspace">
+                <div class="workspace-heading">
+                    <div>
+                        <div class="section-kicker">QUANTUM STATE LAB <span>02</span></div>
+                        <h1 id="workspace-title">Rectangle</h1>
+                        <p>Calculate a quantum state in <strong id="active-geometry-name">Rectangle</strong> geometry.</p>
+                    </div>
+                    <div class="workspace-actions">
+                        <button class="back-button" id="back-to-geometries" type="button"><span aria-hidden="true">←</span> Back to Geometries</button>
+                        <span class="demo-badge" id="calculation-badge"><span></span> NOT CALCULATED</span>
+                    </div>
+                </div>
+
+                <section class="visualization-grid" aria-label="Calculated visualizations">
+                    <article class="visual-panel wave-panel">
+                        <div class="panel-heading">
+                            <div><span class="panel-index">A</span><h2>Wavefunction</h2></div>
+                            <span class="panel-tag">SIGNED AMPLITUDE</span>
+                        </div>
+                        <div class="plot wave-plot" role="img" aria-label="Calculated wavefunction">
+                            <div class="plot-grid" aria-hidden="true"></div>
+                            <canvas class="result-canvas" id="wavefunction-canvas" aria-label="Wavefunction values over the two-dimensional well"></canvas>
+                            <svg class="wave-svg" viewBox="0 0 640 270" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="waveStroke" x1="0" x2="1"><stop offset="0" stop-color="#27d8d0"/><stop offset="0.55" stop-color="#36a9ff"/><stop offset="1" stop-color="#9b83ff"/></linearGradient>
+                                    <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26cbd1" stop-opacity=".19"/><stop offset="1" stop-color="#26cbd1" stop-opacity="0"/></linearGradient>
+                                </defs>
+                                <path class="wave-area" d="M0 139 C32 139 34 75 69 75 S107 202 143 202 179 81 215 81 250 186 286 186 323 104 358 104 394 166 430 166 466 91 501 91 538 176 574 176 608 139 640 139 L640 270 L0 270Z" />
+                                <path class="wave-line wave-line-back" d="M0 139 C32 139 34 75 69 75 S107 202 143 202 179 81 215 81 250 186 286 186 323 104 358 104 394 166 430 166 466 91 501 91 538 176 574 176 608 139 640 139" />
+                                <path class="wave-line" d="M0 139 C32 139 34 75 69 75 S107 202 143 202 179 81 215 81 250 186 286 186 323 104 358 104 394 166 430 166 466 91 501 91 538 176 574 176 608 139 640 139" />
+                                <line class="plot-baseline" x1="0" y1="139" x2="640" y2="139" />
+                            </svg>
+                            <span class="axis-label axis-y">AMPLITUDE</span>
+                            <span class="axis-label axis-x">POSITION</span>
+                            <span class="plot-origin">0</span>
+                        </div>
+                        <div class="plot-caption"><span class="legend-line"></span><span>Selected eigenstate</span><span class="caption-note" id="wavefunction-caption">Awaiting calculation</span></div>
+                    </article>
+
+                    <article class="visual-panel density-panel">
+                        <div class="panel-heading">
+                            <div><span class="panel-index panel-index-purple">B</span><h2>Probability density</h2></div>
+                            <span class="panel-tag">NORMALIZED FIELD</span>
+                        </div>
+                        <div class="plot density-plot" role="img" aria-label="Calculated probability density">
+                            <div class="plot-grid" aria-hidden="true"></div>
+                            <canvas class="result-canvas" id="density-canvas" aria-label="Probability density values over the two-dimensional well"></canvas>
+                            <div class="density-art" aria-hidden="true">
+                                <span class="density-ridge ridge-one"></span><span class="density-ridge ridge-two"></span>
+                                <span class="density-ridge ridge-three"></span><span class="density-ridge ridge-four"></span>
+                                <span class="density-core"></span>
+                            </div>
+                            <span class="axis-label axis-y">INTENSITY</span>
+                            <span class="axis-label axis-x">POSITION</span>
+                        </div>
+                        <div class="plot-caption"><span class="legend-dot"></span><span>|ψ|² probability density</span><span class="caption-note" id="density-caption">Awaiting calculation</span></div>
+                    </article>
+                    <article class="visual-panel potential-panel">
+                        <div class="panel-heading">
+                            <div><span class="panel-index panel-index-purple">C</span><h2>Potential boundary</h2></div>
+                            <span class="panel-tag">INFINITE WELL</span>
+                        </div>
+                        <div class="plot potential-plot" role="img" aria-label="Calculated well domain and infinite potential boundary">
+                            <div class="plot-grid" aria-hidden="true"></div>
+                            <canvas class="result-canvas" id="potential-canvas" aria-label="Zero potential inside the well and infinite potential outside"></canvas>
+                            <span class="axis-label axis-y">POTENTIAL</span>
+                            <span class="axis-label axis-x">POSITION</span>
+                        </div>
+                        <div class="plot-caption"><span class="legend-dot potential-legend"></span><span>V = 0 inside · ∞ outside</span><span class="caption-note" id="potential-caption">Awaiting calculation</span></div>
+                    </article>
+                </section>
+
+                <section class="results-section" aria-labelledby="results-heading">
+                    <div class="results-heading">
+                        <div><div class="section-kicker">OUTPUT SNAPSHOT <span>03</span></div><h2 id="results-heading">Energy results</h2></div>
+                        <span class="results-demo-label" id="results-label">WAITING FOR CALCULATION</span>
+                    </div>
+                    <div class="results-grid">
+                        <article class="result-item"><span class="result-label">STATE ENERGY <span class="result-dot"></span></span><strong id="energy-value">-- <small>meV</small></strong><span class="result-foot" id="energy-foot">Not calculated</span></article>
+                        <article class="result-item"><span class="result-label">LOWEST OTHER STATE <span class="result-dot result-dot-blue"></span></span><strong id="next-energy-value">-- <small>meV</small></strong><span class="result-foot" id="next-energy-foot">Not available</span></article>
+                        <article class="result-item result-note"><span class="result-label">MODEL STATUS</span><strong><span class="status-indicator"></span><span id="model-status">Ready</span></strong><span class="result-foot" id="model-status-detail">Select a shape and calculate.</span></article>
+                    </div>
+                </section>
+
+                <footer class="workspace-footer"><span>QUANTUM WELL EXPLORER</span><span>SHAPE-SPECIFIC CALCULATION <i></i></span></footer>
+            </main>
+
+            <aside class="parameter-sidebar" aria-labelledby="parameters-heading">
+                <div class="parameter-header">
+                    <div class="section-kicker">MODEL INPUTS <span>04</span></div>
+                    <h2 id="parameters-heading">Parameters</h2>
+                    <p>Set geometry and quantum numbers.</p>
+                </div>
+                <form id="parameter-form" autocomplete="off">
+                    <section class="parameter-section" aria-labelledby="dimensions-heading">
+                        <div class="parameter-section-heading"><h3 id="dimensions-heading">Dimensions</h3><span id="dimension-unit">LENGTH · nm</span></div>
+                        <div id="dimension-controls" class="dimension-controls"></div>
+                    </section>
+                    <section class="parameter-section quantum-section" aria-labelledby="quantum-heading">
+                        <div class="parameter-section-heading"><h3 id="quantum-heading">Quantum numbers</h3><span id="state-index-label">STATE INDEX</span></div>
+                        <div class="range-control">
+                            <div class="range-label"><label for="quantum-n"><span id="n-symbol">n</span> <span id="n-label-context">principal index</span></label><output id="n-value" for="quantum-n">1</output></div>
+                            <input id="quantum-n" name="n" type="range" min="1" max="10" value="1">
+                            <div class="range-boundaries"><span>01</span><span id="n-maximum-label">10</span></div>
+                        </div>
+                        <div class="range-control">
+                            <div class="range-label"><label for="quantum-m"><span id="m-symbol">m</span> <span id="m-label-context">secondary index</span></label><output id="m-value" for="quantum-m">2</output></div>
+                            <input id="quantum-m" name="m" type="range" min="1" max="10" value="2">
+                            <div class="range-boundaries"><span id="m-minimum-label">01</span><span id="m-maximum-label">10</span></div>
+                        </div>
+                        <p class="constraint-note" id="constraint-note" hidden>Triangle condition: 1 ≤ n ≤ m ≤ 5</p>
+                    </section>
+                    <button class="calculate-button" id="calculate-button" type="submit"><span aria-hidden="true">↗</span> Calculate state</button>
+                    <p class="calculation-status" id="calculation-status" role="status" aria-live="polite">Ready to calculate.</p>
+                    <div class="parameter-disclaimer"><span aria-hidden="true">◇</span><p>Lengths are entered in nanometres and converted to SI units for the solver.</p></div>
+                </form>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
