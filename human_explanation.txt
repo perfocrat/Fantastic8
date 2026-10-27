@@ -1,0 +1,205 @@
+Fantastic8 physics audit — student explanation
+
+What the project is calculating
+--------------------------------
+
+The three audited Python modules describe a particle confined to a two-
+dimensional shape: a rectangle (including a square), a circle, or an
+equilateral triangle. The code calculates stationary quantum states. A
+stationary state has a definite energy and a spatial wavefunction. These
+modules do not build the paper's moving Gaussian wave packets or calculate
+their later-time revivals.
+
+The supplied paper is primarily about Gaussian wave packets moving in square,
+triangle, and circular billiards. It gives exact stationary-state formulas
+that can be used as building blocks. The code focuses on those stationary
+formulas rather than reproducing the paper's full time-dependent examples.
+
+Schrödinger equation and infinite walls
+--------------------------------------
+
+The time-independent Schrödinger equation is the quantum equation that relates
+a particle's wavefunction to its energy and the potential energy in each
+location. In an infinite-well problem, the potential is zero inside the
+allowed shape and infinitely high outside it. A particle in the model cannot
+exist outside the boundary.
+
+At an infinite wall, the wavefunction must be zero. For example, the
+rectangle's sine factors become zero on each edge. In the circle, the Bessel
+function is chosen at a root so the wavefunction is zero at the circular wall.
+The triangle uses a sum of sine/cosine terms chosen to vanish on the three
+sides.
+
+The code does not numerically solve the two-dimensional Schrödinger PDE on a
+mesh. The rectangle and triangle use analytical trigonometric formulas; the
+circle uses a Bessel function and numerical Bessel roots. A grid or mesh in
+these modules is mainly for evaluating or drawing the already-defined
+wavefunction.
+
+Energy levels and quantum numbers
+---------------------------------
+
+An energy eigenvalue is one of the allowed energies for the confined
+particle. Quantum numbers label which state is being described. Their meaning
+depends on the shape:
+
+* Rectangle: `m` and `n` are positive sine-mode indices in the x and y
+  directions.
+* Circle: `m` is angular order and `n` is the radial root number in the code.
+* Triangle: `m` and `n` are labels for combinations of six plane waves.
+
+The paper and code do not always use the same labels. In the paper's triangle
+section the labels `(M,N)` must satisfy `M >= 2N`. The module uses a
+transformed pair `(m,n)` with `m >= n`; the mapping is `M=m+n`, `N=n`.
+For example, the paper state `(M,N)=(3,1)` is module input `(m,n)=(2,1)`.
+The code's triangle labels should not be compared numerically to the paper's
+labels without this conversion.
+
+For the circle, the paper numbers radial nodes starting at `n_r=0`; the code
+numbers its first positive Bessel root as `n=1`. Thus paper `(m,n_r)=(0,0)`
+corresponds to code `(m,n)=(0,1)`.
+
+The square and rectangle
+------------------------
+
+In `shapes/rectangle.py`, `energy()` calculates the separated sine-well
+energy. `psi()` computes the product of one sine function in x and one in y.
+`probability_density()` computes the squared magnitude of that wavefunction.
+The energy formula and wavefunction are exact analytical expressions.
+
+The paper explicitly gives the square with equal sides `a x a`. The code also
+accepts unequal side lengths `a` and `b`; that general-rectangle formula is
+the standard separated-variable extension, not a fully worked result in the
+paper. In numerical checks, the tested square energies agreed with the
+paper's formula, and the unequal 1-by-2 rectangle agreed with the
+independently derived extension.
+
+The code uses SI Planck and electron-mass constants directly. Therefore the
+raw energy from this module is in joules when lengths are in metres. The
+paper's sample values use a dimensionless convention. To compare numbers
+directly, one must use consistent units or divide out the appropriate energy
+scale.
+
+The circle
+----------
+
+In `shapes/circle.py`, `_lowest_states()` selects roots of Bessel functions,
+`_psi()` evaluates the radial Bessel part and angular sine or cosine part,
+and `_normalization()` sets the total probability integral to one. The radial
+integral uses the polar-area factor `r`; omitting that factor would give the
+wrong normalization.
+
+The paper uses complex angular waves with positive and negative angular
+momentum. The code displays real cosine and sine modes. For nonzero angular
+order those are valid combinations of the paper's two equal-energy states.
+The tested first roots and second zero state had matching energies,
+normalization, boundary values, and wavefunctions after accounting for the
+radial-index shift.
+
+The triangle
+------------
+
+In `shapes/equilateral_triangle.py`, `k_vectors()` constructs the six wave
+vectors; `wavefunction()` adds their signed sine or cosine values and applies
+a normalization factor. `run_triangle()` validates the indices, computes an
+energy coefficient, and writes PNG plots.
+
+The code's triangle is drawn with its base along the bottom, while the paper
+places the base at the top. They are the same triangle after a rotation/
+reflection and translation. To compare the coordinate values, use
+`x_paper=x_module-a/2` and `y_paper=sqrt(3)*a/2-y_module`.
+
+After applying both the coordinate conversion and the index conversion, the
+three tested triangle states agreed with the formulas in the paper. For the
+non-degenerate state, the calculated wavefunction had the opposite overall
+sign from the paper's formula; multiplying a wavefunction by -1 does not
+change its physical probability density or energy. For two degenerate tests,
+the code's states belonged to the paper's two-dimensional degenerate
+eigenspaces; they were compared to the whole space rather than requiring an
+arbitrary choice of one basis function.
+
+One integration limitation is important: `run_triangle()` does not return a
+numeric physical energy. It returns an energy coefficient and equation text.
+The adapter elsewhere in the project computes an SI energy, but the triangle
+module's own returned value should not be described as a joule-valued energy.
+
+Wavefunction, probability, and normalization
+-------------------------------------------
+
+The wavefunction `psi` is a probability-amplitude function. It can be
+positive or negative (or complex). Probability density is `|psi|^2`, so it
+cannot be negative. The rectangle and circle modules explicitly use the
+squared magnitude; the triangle's current wavefunctions are real, so
+`psi**2` is the same as `|psi|^2`.
+
+Normalization means that the total probability over the physical shape is
+one:
+
+    integral over shape of |psi|^2 dA = 1
+
+This is why the numerical normalization integrals in the test table should
+be close to 1. For the circle, `dA = r dr dtheta`; the extra `r` is necessary
+because a thin ring farther from the center covers more area than a ring of
+the same thickness near the center.
+
+How to read the test results
+----------------------------
+
+`test_results.csv` lists 10 executed cases. `PASS` means the energy or energy
+factor, normalization, sampled boundary value, and applicable wavefunction
+comparison met the explicit test thresholds listed in the technical report.
+It does not mean every possible state or every project feature has been
+tested.
+
+* Absolute error is the size of the difference between the reference and the
+  module's value.
+* Relative error is absolute error divided by the reference magnitude. For
+  example, if the reference is 10 and the result is 10.1, the relative error
+  is 0.1/10 = 0.01, or 1%.
+* Normalization error is how far the integrated probability is from 1.
+* Boundary residual is the sampled nonzero wavefunction at a wall, or for the
+  circle the Bessel-root residual that controls the wall value.
+* Wavefunction relative L2 error compares whole fields over the domain. The
+  comparison allows a global sign difference. For degenerate states it checks
+  whether the state lies in the correct equal-energy subspace.
+
+In the triangle rows, the scalar compared is the code's reduced energy
+factor, not a full energy. The full scalar energy is not returned by the
+triangle module. The circle decimal roots were found by an independent
+bracketed root calculation; the paper does not list those exact root decimals.
+
+What is correct, what differs, and what remains uncertain
+---------------------------------------------------------
+
+What matched in the tested cases:
+
+* Rectangle square formulas, normalized sine products, density, and walls.
+* Circle Bessel roots, energy equation, radial normalization, real angular
+  states, and wall behavior after index conversion.
+* Triangle energy coefficients, normalization, wall behavior, and
+  wavefunction/eigenspace comparisons after index and coordinate conversion.
+
+Differences or limitations to tell teammates:
+
+1. The repository has stationary solvers, not a reproduction of the paper's
+   complete moving-wave-packet and revival study.
+2. The paper's triangle and circle labels need explicit mapping to code input
+   labels.
+3. The rectangle uses fixed SI constants; the circle defaults to dimensionless
+   constants; and the triangle returns a reduced energy factor. Do not compare
+   raw values across shapes without a common unit convention.
+4. The triangle's own result lacks numeric arrays and a numeric physical
+   energy; the circle can return Python figure objects when plotting is
+   enabled; and no shape currently returns a potential grid.
+5. Only selected low states were tested. Higher modes, orthogonality across
+   states, broad convergence sweeps, UI behavior, and all plot pixels remain
+   untested.
+6. The supplied PDF confirms the arXiv preprint title, authors, and date, but
+   does not expose the journal citation or DOI. Those details were not
+   independently confirmed from this file.
+
+The tests did not edit any project source. Triangle PNGs produced by the
+calculation were written only under the audit artifact folder. The technical
+report documents two temporary files created outside that folder during PDF
+inspection and isolated plotting; no packages were installed and no Git
+history-changing operation was performed.
